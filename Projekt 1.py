@@ -29,15 +29,21 @@ def hint(answer, gesucht):
         print(f"Herzlichen glückwunsch du hast die gesuchte Zahl {gesucht} gefunden!")
 
 
-def grenzen():
+def unten():
     lower = int(input("bestimme eine untere Grenze:\n"))
+    return lower
+
+
+def oben(lower):
     upper = int(input("bestimme eine obere Grenze:\n"))
     while lower > upper:
         upper = input("die obere Grenze muss größer als die untere Grenze sein!\nbestimme eine obere Grenze\n")
+    return upper
 
 
 def main(lower, upper, answer):
-    grenzen()
+    lower = unten()
+    upper = oben(lower)
     gesucht = randomNumber(lower, upper)
     answer = answerdef(lower, upper)
     hint(answer, gesucht)
