@@ -13,39 +13,49 @@ def randomNumber(lower, upper):
 
 
 def answerdef (lower, upper):
-    answer = (input(f"errate die Zahl in der Grenze {lower} und {upper}:\n"))
-    while answer != int(answer):
-        answer = (input(f"errate die Zahl! in der Grenze {lower} und {upper}:\n"))
+    try: answer = int(input(f"errate die Zahl in der Grenze {lower} und {upper}:\n"))
+    except ValueError:
+        answer = int(input(f"errate die Zahl! in der Grenze {lower} und {upper}:\n"))
     return answer
 
 
 def hint(answer, gesucht):
     while answer != gesucht:
         if answer < gesucht:
-            answer = int(input(f"die gesuchte Zahl ist größer {answer}\n"))
+            try: answer = int(input(f"die gesuchte Zahl ist größer {answer}\n"))
+            except ValueError:
+                answer = int(input(f"die gesuchte Zahl! ist größer {answer}\n"))
         elif answer > gesucht:
-            answer = int(input(f"die gesuchte Zahl ist kleiner {answer}\n"))
+            try: answer = int(input(f"die gesuchte Zahl ist kleiner {answer}\n"))
+            except ValueError:
+                answer = int(input(f"die gesuchte Zahl! ist kleiner {answer}\n"))
     if answer == gesucht:
         print(f"Herzlichen glückwunsch du hast die gesuchte Zahl {gesucht} gefunden!")
 
 
 def unten():
-    lower = int(input("bestimme eine untere Grenze:\n"))
+    try: lower = int(input("bestimme eine untere Grenze:\n"))
+    except ValueError:
+        lower = int(input("bestimme eine Zahl als untere Grenze:\n"))
     return lower
 
 
 def oben(lower):
-    upper = int(input("bestimme eine obere Grenze:\n"))
+    try: upper = int(input("bestimme eine obere Grenze:\n"))
+    except ValueError:
+        upper = int(input("bestimme eine Zahl als obere Grenze:\n"))
     while lower > upper:
-        upper = input("die obere Grenze muss größer als die untere Grenze sein!\nbestimme eine obere Grenze\n")
+        try: upper = int(input("die obere Grenze muss größer als die untere Grenze sein!\nbestimme eine obere Grenze\n"))
+        except ValueError:
+            upper = int(input("die obere Grenze muss eine Zahl und größer als die untere Grenze sein!\nbestimme eine obere Grenze\n"))
     return upper
 
 
 def main(lower, upper, answer):
     lower = unten()
     upper = oben(lower)
-    gesucht = randomNumber(lower, upper)
-    answer = answerdef(lower, upper)
+    gesucht = int(randomNumber(lower, upper))
+    answer = int(answerdef(lower, upper))
     hint(answer, gesucht)
 
 
